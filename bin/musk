@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+var Server  = require('../lib/server');
+
+var fs   = require('fs'),
+	path = require('path');
+
+program
+  	.version('0.0.1')
+  	.description('start service')
+  	.option('-f, --file [file]', 'node mod file path')
+	.option('-s, --srv [service]', 'service type. should be `ws` `sock` or `http`', 'sock')
+	.option('-p, --port [port]', 'Listen port. can be a path string when server is Sock')
+  	.option('-H, --host [hostname]', 'Listen host');
+program.parse(process.argv);
+
+console.log('pid is:', process.pid);
+
+var file = program.file || program.args[0] || './index.js',
+	filepath = path.join(process.cwd(), file);
+if(!fs.existsSync(filepath)){
+	console.log('file not exists!', filepath);
+	process.exit();
+}
+
+var srv = program.srv.toLowerCase(),
+	port = program.port,
+	host = program.host;
+var server;
+switch(srv){
+	case 'sock' :
+		server = new Server.Sock(file, port, host);
+		break;
+	case 'ws' : 
+		server = new Server.Ws(file, {
+			port : parseInt(port, 10),
+			host : host
+		});
+		break;	
+	case 'http' : 
+		server = new Server.Http(file, parseInt(port, 10), host);
+		break;
+	default :
+		console.log('do not support this service type', srv);
+		process.exit();
+}

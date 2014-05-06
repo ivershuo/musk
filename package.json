@@ -1,0 +1,32 @@
+{
+  "name": "musk",
+  "version": "0.0.1",
+  "description": "A communication module based on JSON-RPC",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "bin": {
+    "musk": "./bin/musk"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ivershuo/musk.git"
+  },
+  "keywords": [
+    "json-rpc"
+  ],
+  "dependencies": {
+    "ws": "~0.4.31",
+    "cookie": "~0.1.1",
+    "commander": "~2.2.0",
+    "when": "~3.0.1",
+    "request": "~2.34.0",
+    "jr2-helper": ""
+  },
+  "author": "ivershuo",
+  "license": "MIT"
+}
