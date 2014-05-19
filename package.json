@@ -1,6 +1,6 @@
 {
   "name": "musk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A communication module based on JSON-RPC",
   "main": "lib/index.js",
   "directories": {
